@@ -1,0 +1,12 @@
+.signup-sec {
+    .signup-sec-2 {
+        .error {           
+            height: 25px;
+            font-size: 14px;
+        }
+
+        .error p {
+            padding-top: 2px;
+        }
+    }
+}

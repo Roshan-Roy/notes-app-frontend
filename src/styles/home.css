@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+.home-sec {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+    font-family: 'Didact Gothic', sans-serif;
+
+    .container {
+        margin: 0 auto;
+        width: 85%;
+    }
+
+    .home-sec-1 {
+        padding: 20px 0;
+        border-bottom: 1px solid #333;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & h1 {
+                font-size: 23px;
+            }
+
+            & ul {
+                list-style-type: none;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            & ul.sm-screen li svg {
+                font-size: 30px;
+                color: #333;
+            }
+
+            & ul.sm-screen {
+                @media screen and (min-width:1000px) {
+                    & {
+                        display: none;
+                    }
+                }
+            }
+
+            & ul.lg-screen {
+                display: none;
+
+                @media screen and (min-width:1000px) {
+                    & {
+                        display: flex;
+                    }
+                }
+            }
+
+            & ul.lg-screen li a,
+            & ul.lg-screen li:nth-child(2) {
+                display: block;
+                width: 120px;
+                text-align: center;
+                padding: 12px 0;
+                font-weight: bold;
+                border-radius: 100vh;
+                border: 2px solid #333;
+            }
+
+            & ul.lg-screen li a {
+                background-color: #333;
+                color: white;
+            }
+
+            & ul.lg-screen li:nth-child(2):hover {
+                transition: .1s;
+                color: white;
+                background-color: #333;
+            }
+
+        }
+    }
+
+    .home-sec-2 {
+        flex: 1;
+        display: flex;
+        align-items: center;
+
+        .container {
+            width: 95%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .home-text-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                text-transform: capitalize;
+                & h1 {
+                    font-size: 28px;
+                    margin: 15px 0 25px 0;
+                }
+
+                @media screen and (min-width:500px) {
+                    & h1 {
+                        font-size: 35px;
+                    }
+                }
+
+                & p {
+                    padding: 0 25px;
+                }
+
+                .links-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 7px;
+
+                    & a {
+                        display: block;
+                        width: 100px;
+                        padding: 12px 0;
+                        font-size: 13px;
+                        background-color: #333;
+                        color: white;
+                        border-radius: 100vh;
+                        font-weight: bold;
+                        border: 2px solid #333;
+                        box-sizing: border-box;
+                    }
+
+                    & a.notes-link {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        box-sizing: content-box;
+                        padding: 10px 15px 10px 20px;
+                    }
+
+                    & a:nth-child(2) {
+                        background-color: white;
+                        color: #333;
+                    }
+                }
+
+                @media screen and (min-width:500px) {
+                    .links-container {
+                        flex-direction: row;
+                    }
+                }
+            }
+
+
+            .home-image-container {
+                flex: 1;
+                width: 100%;
+                background-image: url("../images/home.jpg");
+                background-size: 100% 100%;
+                min-height: 250px;
+                max-width: 550px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:1000px) {
+    .home-sec .home-sec-1 {
+        padding: 25px 0;
+
+        .container h1 {
+            font-size: 30px;
+        }
+    }
+
+    .home-sec .home-sec-2 .container {
+        flex-direction: row;
+        width: 85%;
+
+        .home-text-container {
+            flex: 1;
+            align-items: start;
+            & h1 {
+                font-size: 60px;
+                text-align: left;
+                margin: 25px 0 45px 0;
+            }
+
+            & p {
+                padding: 0;
+                font-size: 25px;
+                text-align: left;
+            }
+
+            .links-container {
+                & a {
+                    width: 150px;
+                    padding: 15px 0;
+                    font-size: 15px;
+                }
+
+                & a:nth-child(2):hover {
+                    color: white;
+                    background: #333;
+                    transition: .1s linear;
+                }
+
+                & a.notes-link {
+                    padding: 15px 20px;
+                    width: 130px;
+                }
+            }
+        }
+
+        .home-image-container {
+            max-width: 700px;
+            min-height: 500px;
+            height: 100%;
+        }
+    }
+}
