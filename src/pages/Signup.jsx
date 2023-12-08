@@ -43,11 +43,15 @@ export default function Signup() {
             uptNameError("Name is required")
         } else {
             const nameRegex = /^[a-zA-Z\s]{2,20}$/
-            if(nameRegex.test(name)){
+            if (name.length < 2) {
+                uptNameError("Minimum 2 characters required")
+            } else if (name.length > 20) {
+                uptNameError("Maximum 20 characters allowed")
+            } else if (!nameRegex.test(name)) {
+                uptNameError("Enter a valid name")
+            } else {
                 uptNameError("")
-                nameValidated=true
-            }else{
-                uptNameError("Invalid Name")
+                nameValidated = true
             }
         }
         return nameValidated
