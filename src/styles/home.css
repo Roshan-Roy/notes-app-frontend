@@ -85,23 +85,21 @@
         flex: 1;
         display: flex;
         align-items: center;
-
         .container {
             width: 95%;
             height: 90%;
             display: flex;
             flex-direction: column;
             align-items: center;
-
+            gap:5px;
             .home-text-container {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
-                text-transform: capitalize;
                 & h1 {
                     font-size: 28px;
-                    margin: 15px 0 25px 0;
+                    margin: 15px 0 20px 0;
                 }
 
                 @media screen and (min-width:500px) {
@@ -159,8 +157,8 @@
                 width: 100%;
                 background-image: url("../images/home.jpg");
                 background-size: 100% 100%;
-                min-height: 250px;
-                max-width: 550px;
+                min-height: 100px; 
+                max-width: 450px;
             }
         }
     }
@@ -218,6 +216,7 @@
             max-width: 700px;
             min-height: 500px;
             height: 100%;
+            min-height: 450px;
         }
     }
 }
