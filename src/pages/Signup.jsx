@@ -8,7 +8,7 @@ import BtnLoader from "../components/BtnLoader"
 export default function Signup() {
     //const { authorize } = useAuthFunc()
     const abortController = useRef()
-    const onceChecked = useRef(false)
+    const [onceChecked, uptOnceChecked] = useState(false)
     const [loading, uptLoading] = useState(false)
     const [inpVals, uptInpVals] = useState({
         name: "",
@@ -40,8 +40,8 @@ export default function Signup() {
     }
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        if (!onceChecked.current)
-            onceChecked.current = true
+        if (!onceChecked)
+            uptOnceChecked(true)
         uptServerError("")
         if (validate(inpVals)) {
             uptLoading(true)
@@ -129,7 +129,7 @@ export default function Signup() {
     }
 
     useEffect(() => {
-        if (onceChecked.current)
+        if (onceChecked)
             validate(inpVals)
     }, [inpVals])
 
@@ -149,19 +149,19 @@ export default function Signup() {
             <div className="signup-sec-2">
                 <h1>Sign Up</h1>
                 <form onSubmit={handleFormSubmit}>
-                    <input type="text" placeholder="Name" onChange={elm => uptInpVals({ ...inpVals, name: elm.target.value.trim() })} />
+                    <input type="text" placeholder="Name" onChange={elm => uptInpVals({ ...inpVals, name: elm.target.value.trim() })} disabled={loading}/>
                     <div className="error">
                         <p>{valErrors.nameError}</p>
                     </div>
-                    <input type="text" placeholder="Username" onChange={elm => uptInpVals({ ...inpVals, username: elm.target.value.trim() })} />
+                    <input type="text" placeholder="Username" onChange={elm => uptInpVals({ ...inpVals, username: elm.target.value.trim() })} disabled={loading}/>
                     <div className="error">
                         <p>{valErrors.userNameError}</p>
                     </div>
-                    <input type="password" placeholder="Password" onChange={elm => uptInpVals({ ...inpVals, password: elm.target.value })} />
+                    <input type="password" placeholder="Password" onChange={elm => uptInpVals({ ...inpVals, password: elm.target.value })} disabled={loading}/>
                     <div className="error" >
                         <p>{valErrors.passwordError}</p>
                     </div>
-                    <input type="password" placeholder="Confirm password" onChange={elm => uptInpVals({ ...inpVals, cPassword: elm.target.value })} />
+                    <input type="password" placeholder="Confirm password" onChange={elm => uptInpVals({ ...inpVals, cPassword: elm.target.value })} disabled={loading}/>
                     <div className="error">
                         <p>{valErrors.confirmPasswordError}</p>
                     </div>
