@@ -2,11 +2,14 @@ import { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import "../styles/signup.css"
 import axios from 'axios'
+import BtnLoader from "../components/BtnLoader"
 //import { useAuthFunc } from "../components/AppContext"
 
 export default function Signup() {
     //const { authorize } = useAuthFunc()
+    const abortController = useRef()
     const onceChecked = useRef(false)
+    const [loading, uptLoading] = useState(false)
     const [inpVals, uptInpVals] = useState({
         name: "",
         username: "",
@@ -39,21 +42,28 @@ export default function Signup() {
         e.preventDefault()
         if (!onceChecked.current)
             onceChecked.current = true
+        uptServerError("")
         if (validate(inpVals)) {
+            uptLoading(true)
             const { name, username, password } = inpVals
             try {
                 const responseData = await axios.post("http://localhost:5000/api/signup", {
                     name,
                     username,
                     password
+                }, {
+                    signal: abortController.current.signal
                 })
                 console.log(responseData)
             } catch (e) {
-                const errorStatusCode = e.response.status
-                if (errorStatusCode === 400) {
-                    uptUsernameError("Username already exists")
-                } else {
-                    uptServerError("Something went wrong")
+                if (e.name !== "CanceledError") {
+                    uptLoading(false)
+                    const errorStatusCode = e.response.status
+                    if (errorStatusCode === 400) {
+                        uptUsernameError("Username already exists")
+                    } else {
+                        uptServerError("Something went wrong, Try again !")
+                    }
                 }
             }
         }
@@ -82,7 +92,7 @@ export default function Signup() {
         }
 
         if (username === "")
-            uptUsernameError("username is required")
+            uptUsernameError("Username is required")
         else if (username.length < 5)
             uptUsernameError("Minimum 5 characters required")
         else if (username.length > 20)
@@ -123,6 +133,13 @@ export default function Signup() {
             validate(inpVals)
     }, [inpVals])
 
+    useEffect(() => {
+        abortController.current = new AbortController()
+        return () => {
+            abortController.current.abort()
+        }
+    }, [])
+
     return (
         <section className="signup-sec">
             <div className="signup-sec-1">
@@ -148,12 +165,15 @@ export default function Signup() {
                     <div className="error">
                         <p>{valErrors.confirmPasswordError}</p>
                     </div>
-                    <button type="submit">Sign up</button>
+                    <div className="btn-container">
+                        <button type="submit" disabled={loading}>Sign Up</button>
+                        {loading ? <BtnLoader /> : null}
+                    </div>
                     <div className="error server">
                         <p>{valErrors.serverError}</p>
                     </div>
                 </form>
-                <p>Already have an account ? <Link to="/login">Login</Link></p>
+                <p>Already have an account ? <Link to="/login">Log In</Link></p>
             </div>
         </section>
     )
