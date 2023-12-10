@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom"
-export default function About(){
+import Navbar from "../components/Navbar"
+
+export default function About() {
   return (
     <>
-    <Link to="/">Home</Link>
-    <h1>About</h1>
+      <Navbar />
+      <h1>About</h1>
     </>
   )
 }

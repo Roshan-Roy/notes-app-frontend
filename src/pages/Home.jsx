@@ -7,6 +7,10 @@ import { FaArrowRight } from "react-icons/fa"
 
 export default function Home() {
   const { authVal, unauthorize } = useAuthFunc()
+  const getName = () => {
+    const userObj = JSON.parse(sessionStorage.getItem("my-notes-user"))
+    return userObj.name
+  }
   const handleLogout = () => {
     unauthorize()
   }
@@ -17,11 +21,11 @@ export default function Home() {
           <h1>NoteFlow</h1>
           <ul className="sm-screen">
             <li><Link to="/about"><AiOutlineInfoCircle /></Link></li>
-            {authVal ? <li><FiLogOut /></li> : null}
+            {authVal ? <li onClick={handleLogout}><FiLogOut /></li> : null}
           </ul>
           <ul className="lg-screen">
             <li><Link to="/about">About</Link></li>
-            {authVal?<li>Log out</li>:null}
+            {authVal ? <li onClick={handleLogout}>Log Out</li> : null}
           </ul>
         </div>
       </div>
@@ -30,10 +34,10 @@ export default function Home() {
         <div className="container">
 
           <div className="home-text-container">
-            {authVal ? <p>Hi roshan</p> : <p>unleash your creativity, capture your thoughts</p>}
-            <h1>welcome to<br />NoteFlow</h1>
+            {authVal ? <p>Hi, {getName()}</p> : <p>Unleash Your Creativity, Capture Your Thoughts</p>}
+            <h1>Welcome To<br />NoteFlow</h1>
             <div className="links-container">
-              {authVal ? <Link to="/notes" className="notes-link">show notes <FaArrowRight /></Link> : <><Link to="/signup">sign up</Link><Link to="/login">log in</Link></>}
+              {authVal ? <Link to="/notes" className="notes-link">Show Notes <FaArrowRight /></Link> : <><Link to="/signup">Sign Up</Link><Link to="/login">Log In</Link></>}
             </div>
           </div>
 

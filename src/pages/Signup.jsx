@@ -3,10 +3,11 @@ import { Link } from "react-router-dom"
 import "../styles/signup.css"
 import axios from 'axios'
 import BtnLoader from "../components/BtnLoader"
-//import { useAuthFunc } from "../components/AppContext"
+import Navbar from "../components/Navbar"
+import { useAuthFunc } from "../components/AppContext"
 
 export default function Signup() {
-    //const { authorize } = useAuthFunc()
+    const { authorize } = useAuthFunc()
     const abortController = useRef()
     const [onceChecked, uptOnceChecked] = useState(false)
     const [loading, uptLoading] = useState(false)
@@ -54,12 +55,11 @@ export default function Signup() {
                 }, {
                     signal: abortController.current.signal
                 })
-                console.log(responseData)
+                authorize(responseData.data)
             } catch (e) {
                 if (e.name !== "CanceledError") {
                     uptLoading(false)
-                    const errorStatusCode = e.response.status
-                    if (errorStatusCode === 400) {
+                    if (e.response && e.response.status === 400) {
                         uptUsernameError("Username already exists")
                     } else {
                         uptServerError("Something went wrong, Try again !")
@@ -142,26 +142,23 @@ export default function Signup() {
 
     return (
         <section className="signup-sec">
-            <div className="signup-sec-1">
-                <h1>NoteFlow</h1>
-                <Link to="/">Home</Link>
-            </div>
+            <Navbar />
             <div className="signup-sec-2">
                 <h1>Sign Up</h1>
                 <form onSubmit={handleFormSubmit}>
-                    <input type="text" placeholder="Name" onChange={elm => uptInpVals({ ...inpVals, name: elm.target.value.trim() })} disabled={loading}/>
+                    <input type="text" placeholder="Name" onChange={elm => uptInpVals({ ...inpVals, name: elm.target.value.trim() })} disabled={loading} />
                     <div className="error">
                         <p>{valErrors.nameError}</p>
                     </div>
-                    <input type="text" placeholder="Username" onChange={elm => uptInpVals({ ...inpVals, username: elm.target.value.trim() })} disabled={loading}/>
+                    <input type="text" placeholder="Username" onChange={elm => uptInpVals({ ...inpVals, username: elm.target.value.trim() })} disabled={loading} />
                     <div className="error">
                         <p>{valErrors.userNameError}</p>
                     </div>
-                    <input type="password" placeholder="Password" onChange={elm => uptInpVals({ ...inpVals, password: elm.target.value })} disabled={loading}/>
+                    <input type="password" placeholder="Password" onChange={elm => uptInpVals({ ...inpVals, password: elm.target.value })} disabled={loading} />
                     <div className="error" >
                         <p>{valErrors.passwordError}</p>
                     </div>
-                    <input type="password" placeholder="Confirm password" onChange={elm => uptInpVals({ ...inpVals, cPassword: elm.target.value })} disabled={loading}/>
+                    <input type="password" placeholder="Confirm password" onChange={elm => uptInpVals({ ...inpVals, cPassword: elm.target.value })} disabled={loading} />
                     <div className="error">
                         <p>{valErrors.confirmPasswordError}</p>
                     </div>

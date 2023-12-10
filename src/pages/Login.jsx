@@ -1,24 +1,12 @@
 import { Link } from "react-router-dom"
-import { useAuthFunc } from "../components/AppContext"
+import Navbar from "../components/Navbar"
 
 export default function Login() {
-    const { authorize } = useAuthFunc()
-    const handleFormSubmit = (e) => {
-        e.preventDefault()
-        setTimeout(() => {
-            authorize({
-                name: "roshan roy",
-                token: "qwerty12345678"
-            })
-        }, 3000)
-    }
     return (
         <>
-            <Link to="/">Home</Link>
-            <br />
-            <br />
+            <Navbar/>
             <h1>Login</h1>
-            <form onSubmit={handleFormSubmit}>
+            <form>
                 <input type="text" placeholder="Username" />
                 <br />
                 <input type="password" placeholder="Password" />
