@@ -5,10 +5,13 @@ import axios from 'axios'
 import BtnLoader from "../components/BtnLoader"
 import Navbar from "../components/Navbar"
 import { useAuthFunc } from "../components/AppContext"
+import { PiEyeBold } from "react-icons/pi"
+import { PiEyeClosedBold } from "react-icons/pi"
 
 export default function Signup() {
     const { authorize } = useAuthFunc()
     const abortController = useRef()
+    const [pwVisible, uptPwVisible] = useState(false)
     const [onceChecked, uptOnceChecked] = useState(false)
     const [loading, uptLoading] = useState(false)
     const [inpVals, uptInpVals] = useState({
@@ -79,7 +82,7 @@ export default function Signup() {
         const usernameRegex = /^[a-z_][a-z0-9_]{4,19}$/
 
         if (name === "")
-            uptNameError("Name is required")
+            uptNameError("Must not be empty")
         else if (name.length < 2)
             uptNameError("Minimum 2 characters required")
         else if (name.length > 20)
@@ -92,7 +95,7 @@ export default function Signup() {
         }
 
         if (username === "")
-            uptUsernameError("Username is required")
+            uptUsernameError("Must not be empty")
         else if (username.length < 5)
             uptUsernameError("Minimum 5 characters required")
         else if (username.length > 20)
@@ -105,7 +108,7 @@ export default function Signup() {
         }
 
         if (password === "")
-            uptPasswordError("Password is required")
+            uptPasswordError("Must not be empty")
         else if (password.length < 6)
             uptPasswordError("Minimum 6 characters required")
         else if (password.length > 12)
@@ -115,9 +118,7 @@ export default function Signup() {
             passwordValidated = true
         }
 
-        if (cPassword === "")
-            uptConfirmPasswordError("Re-enter your password")
-        else if (cPassword !== password)
+        if (cPassword !== password)
             uptConfirmPasswordError("Passwords do not match")
         else {
             uptConfirmPasswordError("")
@@ -126,6 +127,9 @@ export default function Signup() {
 
         return nameValidated && usernameValidated && passwordValidated && cPasswordValidated
 
+    }
+    const togglePwVisibility = () => {
+        uptPwVisible(e => !e)
     }
 
     useEffect(() => {
@@ -144,34 +148,56 @@ export default function Signup() {
         <section className="signup-sec">
             <Navbar />
             <div className="signup-sec-2">
-                <h1>Sign Up</h1>
-                <form onSubmit={handleFormSubmit}>
-                    <input type="text" placeholder="Name" onChange={elm => uptInpVals({ ...inpVals, name: elm.target.value.trim() })} disabled={loading} />
-                    <div className="error">
-                        <p>{valErrors.nameError}</p>
-                    </div>
-                    <input type="text" placeholder="Username" onChange={elm => uptInpVals({ ...inpVals, username: elm.target.value.trim() })} disabled={loading} />
-                    <div className="error">
-                        <p>{valErrors.userNameError}</p>
-                    </div>
-                    <input type="password" placeholder="Password" onChange={elm => uptInpVals({ ...inpVals, password: elm.target.value })} disabled={loading} />
-                    <div className="error" >
-                        <p>{valErrors.passwordError}</p>
-                    </div>
-                    <input type="password" placeholder="Confirm password" onChange={elm => uptInpVals({ ...inpVals, cPassword: elm.target.value })} disabled={loading} />
-                    <div className="error">
-                        <p>{valErrors.confirmPasswordError}</p>
-                    </div>
-                    <div className="btn-container">
-                        <button type="submit" disabled={loading}>Sign Up</button>
+                <div className="container">
+                    <form onSubmit={handleFormSubmit}>
+                        <h1>Sign Up</h1>
+
+                        <div className="inp-wrapper">
+                            <label htmlFor="name">Name</label>
+                            <input id="name" type="text" placeholder="Enter your name" onChange={elm => uptInpVals({ ...inpVals, name: elm.target.value.trim() })} disabled={loading} />
+                        </div>
+                        <div className="error">
+                            <p>{valErrors.nameError}</p>
+                        </div>
+
+                        <div className="inp-wrapper">
+                            <label htmlFor="username">Username</label>
+                            <input id="username" type="text" placeholder="Enter you username" onChange={elm => uptInpVals({ ...inpVals, username: elm.target.value.trim() })} disabled={loading} />
+                        </div>
+                        <div className="error">
+                            <p>{valErrors.userNameError}</p>
+                        </div>
+
+                        <div className="inp-wrapper password">
+                            <label htmlFor="password">Password</label>
+                            <div className="inp-password-container">
+                                <input id="password" type={pwVisible ? "text" : "password"} placeholder="Enter your password" onChange={elm => uptInpVals({ ...inpVals, password: elm.target.value })} disabled={loading} />
+                                <div className="eye-container" onClick={togglePwVisibility}>{pwVisible ? <PiEyeBold /> : <PiEyeClosedBold />}</div>
+                            </div>
+                        </div>
+                        <div className="error" >
+                            <p>{valErrors.passwordError}</p>
+                        </div>
+
+                        <div className="inp-wrapper">
+                            <label htmlFor="cpassword">Confirm</label>
+                            <input id="cpassword" type={pwVisible ? "text" : "password"} placeholder="Re-enter your password" onChange={elm => uptInpVals({ ...inpVals, cPassword: elm.target.value })} disabled={loading} />
+                        </div>
+                        <div className="error">
+                            <p>{valErrors.confirmPasswordError}</p>
+                        </div>
+
+                        <div className="btn-container">
+                            <button type="submit" className={loading?"disabled":null} disabled={loading}>Sign Up</button>
                         {loading ? <BtnLoader /> : null}
-                    </div>
-                    <div className="error server">
-                        <p>{valErrors.serverError}</p>
-                    </div>
-                </form>
-                <p>Already have an account ? <Link to="/login">Log In</Link></p>
-            </div>
-        </section>
+                </div>
+                <div className="error server">
+                    <p>{valErrors.serverError}</p>
+                </div>
+                <p>Already Have An Account ? <Link to="/login">Log In</Link></p>
+            </form>
+        </div>
+            </div >
+        </section >
     )
 }

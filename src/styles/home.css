@@ -88,13 +88,13 @@
             width: 95%;
             height: 90%;
             max-height: 600px;
-            min-height: 300px;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 5px;
             overflow-x: hidden;
-
+            padding: 10px 0;
             .home-text-container {
                 display: flex;
                 flex-direction: column;
