@@ -160,7 +160,7 @@
             .home-image-container {
                 flex: 1;
                 width: 100%;
-                background-image: url("../images/home.jpg");
+                background-image: url("/home.jpg");
                 background-size: 100% 100%;
                 max-width: 450px;
             }

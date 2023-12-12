@@ -149,6 +149,12 @@ export default function Signup() {
             <Navbar />
             <div className="signup-sec-2">
                 <div className="container">
+                    <div className="bg-register signup">
+                        <div className="bg-text">
+                            <h1>Nurturing Creativity</h1>
+                            <p>Explore, ideate, and let NoteFlow be the conduit for your most inspired thoughts</p>
+                        </div>
+                    </div>
                     <form onSubmit={handleFormSubmit}>
                         <h1>Sign Up</h1>
 
