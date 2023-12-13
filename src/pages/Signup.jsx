@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
-import "../styles/signup.css"
+import "../styles/auth-pages.css"
 import axios from 'axios'
 import BtnLoader from "../components/BtnLoader"
 import Navbar from "../components/Navbar"
@@ -145,9 +145,9 @@ export default function Signup() {
     }, [])
 
     return (
-        <section className="signup-sec">
+        <section className="auth-sec">
             <Navbar />
-            <div className="signup-sec-2">
+            <div className="auth-sec-2">
                 <div className="container">
                     <div className="bg-register signup">
                         <div className="bg-text">
