@@ -9,8 +9,7 @@ export function useAuthFunc() {
 
 export default function AppContext() {
     const [authVal, updateAuthVal] = useState(() => {
-        //return sessionStorage.getItem("my-notes-user") ? true : false
-        return false
+        return sessionStorage.getItem("my-notes-user") ? true : false
     })
     const authorize = (e) => {
         sessionStorage.setItem("my-notes-user", JSON.stringify(e))

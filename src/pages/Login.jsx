@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
-import "../styles/auth-pages.css"
 import axios from 'axios'
 import BtnLoader from "../components/BtnLoader"
 import Navbar from "../components/Navbar"

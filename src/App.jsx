@@ -1,5 +1,7 @@
 import AppContext from './components/AppContext'
-import './App.css'
+import "./styles/auth-pages.css"
+import "./styles/dialog.css"
+import "./App.css"
 
 function App() {
   return <AppContext />
