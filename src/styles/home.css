@@ -63,6 +63,7 @@
                 font-weight: bold;
                 border-radius: 100vh;
                 border: 2px solid #333;
+                transition: .1s linear;
             }
 
             & ul.lg-screen li a {
@@ -71,7 +72,6 @@
             }
 
             & ul.lg-screen li:nth-child(2):hover {
-                transition: .1s;
                 color: white;
                 background-color: #333;
             }
@@ -95,6 +95,7 @@
             gap: 5px;
             overflow-x: hidden;
             padding: 10px 0;
+
             .home-text-container {
                 display: flex;
                 flex-direction: column;
@@ -187,33 +188,46 @@
             align-items: start;
 
             & h1 {
-                font-size: 60px;
+                font-size: 75px;
                 text-align: left;
-                margin: 25px 0 45px 0;
+                margin: 15px 0 45px 0;
             }
 
             & p {
                 padding: 0 50px 0 0;
-                font-size: 25px;
+                font-size: 30px;
                 text-align: left;
             }
 
             .links-container {
                 & a {
-                    width: 150px;
-                    padding: 15px 0;
-                    font-size: 15px;
+                    width: 170px;
+                    padding: 18px 0;
+                    font-size: 17px;
+                    transition: .1s linear;
                 }
 
                 & a:nth-child(2):hover {
                     color: white;
                     background: #333;
-                    transition: .1s linear;
                 }
 
                 & a.notes-link {
-                    padding: 15px 20px;
-                    width: 130px;
+                    padding: 17px 30px;
+                    width: 150px;
+                    transition: .2s linear;
+                }
+
+                & a.notes-link svg {
+                    transform: rotate(-180deg);
+                    transition: .2s linear;
+                }
+
+                & a.notes-link:hover svg {
+                    transform: rotate(0deg);
+                }
+                & a.notes-link:hover{
+                    width: 190px;
                 }
             }
         }
