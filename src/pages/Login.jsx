@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
-import axios from 'axios'
+import axios from "axios"
 import BtnLoader from "../components/BtnLoader"
 import Navbar from "../components/Navbar"
 import { useAuthFunc } from "../components/AppContext"
