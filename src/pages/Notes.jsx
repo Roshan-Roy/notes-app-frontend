@@ -7,6 +7,10 @@ import { AiFillStar } from "react-icons/ai"
 import { FiSearch } from "react-icons/fi"
 import Note from "../components/Note"
 import Errors from "../components/errors"
+import { MdOutlineSearchOff } from "react-icons/md"
+import { TbFaceIdError } from "react-icons/tb"
+import { TbNotesOff } from "react-icons/tb"
+import { LuStarOff } from "react-icons/lu"
 import "../styles/notes.css"
 
 export default function Notes() {
@@ -68,13 +72,13 @@ export default function Notes() {
       </div>
       <div className="notes-sec-2">
         <div className="container">
-          {serverError ? <Errors msg="something went wrong" /> :
+          {serverError ? <Errors msg="An error occurred !" svg={<TbFaceIdError />} /> :
             loading ? <h1>loading...</h1> :
-              notes.length === 0 && type ? <Errors msg="No notes added" /> :
-                notes.length === 0 ? <Errors msg="no starred notes" /> :
-                  filteredNotes.length === 0 ? <Errors msg="no match found" /> :
+              notes.length === 0 && type ? <Errors msg="No notes found" svg={<TbNotesOff />} /> :
+                notes.length === 0 ? <Errors msg="No starred notes" svg={<LuStarOff/>}/> :
+                  filteredNotes.length === 0 ? <Errors msg="No results found" svg={<MdOutlineSearchOff />} /> :
                     type ? filteredNotes.map(e => <Note key={e._id} note={e} />) :
-                      filteredNotes.filter(e => e.starred).length === 0 ? <Errors msg="no match found" /> :
+                      filteredNotes.filter(e => e.starred).length === 0 ? <Errors msg="No results found" svg={<MdOutlineSearchOff />} /> :
                         filteredNotes.filter(e => e.starred).map(e => <Note key={e._id} note={e} />)}
         </div>
       </div>

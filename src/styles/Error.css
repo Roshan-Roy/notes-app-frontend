@@ -1,0 +1,8 @@
+.notes-error-wrapper .notes-error {
+    color: #bbb;
+    text-align: center;
+    & div svg {
+        font-size: 85px;
+        margin-bottom: 10px;
+    }
+}
