@@ -6,6 +6,7 @@
         display: flex;
         align-items: center;
         position: fixed;
+        top: 0;
         width: 100%;
 
         @media screen and (min-width:1000px) {
@@ -103,7 +104,12 @@
     .notes-sec-2 {
         position: relative;
         top: 80px;
-
+        .container .notes{
+            display: grid;
+            gap: 10px;
+            padding: 5px 0 40px 0;
+            width: 100%;
+        }
         .container .notes-error-wrapper {
             position: relative;
             height: calc(100vh - 80px);
@@ -115,6 +121,15 @@
                 top: calc(50% - 40px);
                 transform: translateY(-50%);
             }
+        }
+
+        .container .load-wrapper {
+            position: relative;
+            height: calc(100vh - 120px);
+            min-height: 275px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         @media screen and (min-width:1000px) {

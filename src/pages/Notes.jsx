@@ -11,6 +11,7 @@ import { MdOutlineSearchOff } from "react-icons/md"
 import { TbFaceIdError } from "react-icons/tb"
 import { TbNotesOff } from "react-icons/tb"
 import { LuStarOff } from "react-icons/lu"
+import PageLoader from "../components/PageLoader"
 import "../styles/notes.css"
 
 export default function Notes() {
@@ -20,7 +21,6 @@ export default function Notes() {
   const [filteredNotes, uptFilteredNotes] = useState()
   const [searchVal, uptSearchVal] = useState("")
   const [serverError, uptServerError] = useState(false)
-
   const abortController = useRef()
   const performSearch = () => {
     uptFilteredNotes(notes.filter(e => e.title.startsWith(searchVal)))
@@ -73,13 +73,13 @@ export default function Notes() {
       <div className="notes-sec-2">
         <div className="container">
           {serverError ? <Errors msg="An error occurred !" svg={<TbFaceIdError />} /> :
-            loading ? <h1>loading...</h1> :
+            loading ? <PageLoader /> :
               notes.length === 0 && type ? <Errors msg="No notes found" svg={<TbNotesOff />} /> :
-                notes.length === 0 ? <Errors msg="No starred notes" svg={<LuStarOff/>}/> :
+                notes.length === 0 ? <Errors msg="No starred notes" svg={<LuStarOff />} /> :
                   filteredNotes.length === 0 ? <Errors msg="No results found" svg={<MdOutlineSearchOff />} /> :
-                    type ? filteredNotes.map(e => <Note key={e._id} note={e} />) :
+                    type ? <div className="notes">{filteredNotes.map(e => <Note key={e._id} note={e} />)}</div> :
                       filteredNotes.filter(e => e.starred).length === 0 ? <Errors msg="No results found" svg={<MdOutlineSearchOff />} /> :
-                        filteredNotes.filter(e => e.starred).map(e => <Note key={e._id} note={e} />)}
+                        <div className="notes">{filteredNotes.filter(e => e.starred).map(e => <Note key={e._id} note={e} />)}</div>}
         </div>
       </div>
     </section>
