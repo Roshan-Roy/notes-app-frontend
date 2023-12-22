@@ -7,6 +7,7 @@ import Login from "../pages/Login"
 import Notes from "../pages/Notes"
 import AuthProtect from "../protect/AuthProtect"
 import NotesProtect from "../protect/NotesProtect"
+import AddNote from "../pages/AddNote"
 export default function AppRoutes() {
     return (
         <Routes>
@@ -15,7 +16,8 @@ export default function AppRoutes() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<AuthProtect e={<Signup />} />} />
             <Route path="/login" element={<AuthProtect e={<Login />} />} />
-            <Route path="/Notes" element={<NotesProtect e={<Notes />} />} />
+            <Route path="/notes" element={<NotesProtect e={<Notes />} />} />
+            <Route path="/add" element={<NotesProtect e={<AddNote/>}/>}/>
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     )

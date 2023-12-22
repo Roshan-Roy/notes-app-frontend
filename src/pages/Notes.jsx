@@ -12,6 +12,7 @@ import { TbFaceIdError } from "react-icons/tb"
 import { TbNotesOff } from "react-icons/tb"
 import { LuStarOff } from "react-icons/lu"
 import PageLoader from "../components/PageLoader"
+import { IoMdAdd } from "react-icons/io"
 import "../styles/notes.css"
 
 export default function Notes() {
@@ -23,7 +24,12 @@ export default function Notes() {
   const [serverError, uptServerError] = useState(false)
   const abortController = useRef()
   const performSearch = () => {
-    uptFilteredNotes(notes.filter(e => e.title.startsWith(searchVal)))
+    uptFilteredNotes(notes.filter(e => {
+      const searchedVal = searchVal.toLowerCase()
+      const title = e.title.toLowerCase()
+      const description = e.description.toLowerCase()
+      return title.includes(searchedVal) || description.includes(searchedVal)
+    }))
   }
   useEffect(() => {
     uptSearchVal("")
@@ -64,6 +70,7 @@ export default function Notes() {
             <li><label htmlFor="search"><FiSearch /></label></li>
             <li><input type="text" placeholder={type ? "All Notes" : "Starred Notes"} id="search" onChange={e => { uptSearchVal(e.target.value) }} value={searchVal} /></li>
             <li onClick={() => {
+              window.scrollTo(0,0)
               uptType(e => !e)
             }}>{type ? <AiOutlineStar /> : <AiFillStar />}</li>
             <li><Link to="/"><FaHome /></Link></li>
@@ -82,6 +89,7 @@ export default function Notes() {
                         <div className="notes">{filteredNotes.filter(e => e.starred).map(e => <Note key={e._id} note={e} />)}</div>}
         </div>
       </div>
+      <Link to="/add" className="add-btn"><IoMdAdd /></Link>
     </section>
   )
 }
