@@ -42,7 +42,7 @@ export default function Notes() {
     const fetchAllNotes = async () => {
       try {
         const url = "http://localhost:5000/api/notes"
-        const { token } = JSON.parse(sessionStorage["my-notes-user"])
+        const { token } = JSON.parse(sessionStorage.getItem("my-notes-user"))
         const headers = {
           "Authorization": `Bearer ${token}`
         }

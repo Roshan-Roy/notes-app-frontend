@@ -4,6 +4,7 @@ import { useAuthFunc } from "../components/AppContext"
 import { AiOutlineInfoCircle } from "react-icons/ai"
 import { FiLogOut } from "react-icons/fi"
 import { FaArrowRight } from "react-icons/fa"
+import "../styles/dialog_1.css"
 import "../styles/home.css"
 
 export default function Home() {
@@ -53,7 +54,7 @@ export default function Home() {
           <div className="home-image-container"></div>
         </div>
       </div>
-      <dialog ref={dialog} className="dialog-box">
+      <dialog ref={dialog} className="dialog-box-1">
         <div className="image-container"></div>
         <h2>Comeback Soon!</h2>
         <p>Are you sure you want to logout?</p>

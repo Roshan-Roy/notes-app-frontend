@@ -139,7 +139,7 @@
 
         .container .load-wrapper {
             position: relative;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 150px);
             min-height: 275px;
             display: flex;
             justify-content: center;
