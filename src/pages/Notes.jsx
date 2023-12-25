@@ -36,6 +36,7 @@ export default function Notes() {
   }, [type])
   useEffect(() => {
     performSearch()
+    window.scrollTo(0,0)
   }, [notes, searchVal])
   useEffect(() => {
     abortController.current = new AbortController()

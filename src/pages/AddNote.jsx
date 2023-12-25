@@ -2,6 +2,9 @@ import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 import "../styles/addnote.css"
+import { FaHome, FaRegListAlt } from "react-icons/fa"
+import { AiOutlineStar } from "react-icons/ai"
+import { AiFillStar } from "react-icons/ai"
 
 export default function AddNote() {
     const [onceChecked, uptOnceChecked] = useState(false)
@@ -13,42 +16,38 @@ export default function AddNote() {
         title: "",
         note: ""
     })
-    const [errors, uptErrors] = useState({
-        titleError: "",
-        noteError: "",
-        serverError: ""
+    const [error, uptErrors] = useState({
+        shown: false,
+        message: "nf"
     })
-    const uptTitleError = (msg) => {
-        uptErrors(e => ({ ...e, titleError: msg }))
+    const showError = (msg) => {
+        uptErrors({ shown: true, message: msg })
     }
-    const uptNoteError = (msg) => {
-        uptErrors(e => ({ ...e, noteError: msg }))
-    }
-    const uptServerError = (msg) => {
-        uptErrors(e => ({ ...e, serverError: msg }))
+    const hideError = () => {
+        uptErrors({ shown: false, message: "" })
     }
     const validate = (title, note) => {
         let titleValidated = false
         let noteValidated = false
-        if (title === "") uptTitleError("Title must not be empty")
-        else if (title.length > 30) uptTitleError("Max length is 30 characters")
-        else {
-            uptTitleError("")
-            titleValidated = true
-        }
-        if (note === "") uptNoteError("Note must not be empty")
-        else if (note.length > 1000) uptNoteError("Max length is 1000 characters")
-        else {
-            uptNoteError("")
-            noteValidated = true
-        }
+        const errorArr = []
+
+        if (title === "") errorArr.push("Title is empty")
+        else if (title.length > 30) errorArr.push("Title length < 30")
+        else titleValidated = true
+
+        if (note === "") errorArr.push("Note is empty")
+        else if (note.length > 1000) errorArr.push("Note length > 1000")
+        else noteValidated = true
+
+        if (noteValidated && titleValidated) hideError()
+        else showError(errorArr.join(", "))
+
         return titleValidated && noteValidated
     }
     const handleSaveBtn = async () => {
         if (!onceChecked) uptOnceChecked(true)
         if (validate(inpObj.title.trim(), inpObj.note.trim())) {
             uptDisabled(true)
-            uptServerError("")
             const apiUrl = "http://localhost:5000/api/notes"
             const { token } = JSON.parse(sessionStorage.getItem("my-notes-user"))
             const headers = {
@@ -71,7 +70,7 @@ export default function AddNote() {
             } catch (e) {
                 if (e.name != "canceledError") {
                     uptDisabled(false)
-                    uptServerError("Something went wrong")
+                    showError("Something went wrong")
                 }
             }
         }
@@ -86,6 +85,7 @@ export default function AddNote() {
 
     useEffect(() => {
         abortController.current = new AbortController()
+        window.scrollTo(0, 0)
         return () => {
             abortController.current.abort()
         }
@@ -96,25 +96,25 @@ export default function AddNote() {
             <div className="header">
                 <div className="container">
                     <h2>Add Note</h2>
-                    <Link to="/notes">Notes</Link>
-                    <Link to="/">Home</Link>
+                    <div className="links-container sm">
+                        <Link to="/notes"><FaRegListAlt /></Link>
+                        <Link to="/"><FaHome /></Link>
+                    </div>
                 </div>
             </div>
             <div className="add-upt-inputs">
                 <div className="container">
                     <input type="text" value={inpObj.title} placeholder="Title" onChange={i => uptInpObj(e => ({ ...e, title: i.target.value }))} disabled={disabled} />
-                    <p className="error inp">{errors.titleError}</p>
                     <textarea value={inpObj.note} placeholder="Note" onChange={i => uptInpObj(e => ({ ...e, note: i.target.value }))} disabled={disabled}></textarea>
-                    <p className="error inp">{errors.noteError}</p>
                 </div>
             </div>
             <div className="save-footer">
+                {error.shown ? <p className="error-div">{error.message}</p> : null}
                 <div className="container">
-                    <p className="error server">{errors.serverError}</p>
-                    <button onClick={handleSaveBtn} disabled={disabled}>{disabled ? "saving" : "save"}</button>
-                    <p onClick={() => {
+                    <button onClick={handleSaveBtn} className={disabled ? "disabled" : null} disabled={disabled}>{disabled ? "Saving" : "Save"}</button>
+                    <div className={disabled ? "disabled" : null} onClick={() => {
                         if (!disabled) uptStarred(e => !e)
-                    }}>{starred ? "starred" : "not Starred"}</p>
+                    }}>{starred ? <AiFillStar /> : <AiOutlineStar />}</div>
                 </div>
             </div>
             <dialog ref={dialog} className="dialog-box">
