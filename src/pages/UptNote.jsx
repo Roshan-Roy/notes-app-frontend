@@ -6,7 +6,7 @@ import { MdDelete, MdErrorOutline, MdOutlineDoneOutline } from "react-icons/md"
 import { useParams, useNavigate } from "react-router-dom"
 import PageLoader from "../components/PageLoader"
 import BtnLoader from "../components/BtnLoader"
-import Errors from "../components/errors"
+import Errors from "../components/Errors"
 import axios from "axios"
 
 export default function UptNote() {
