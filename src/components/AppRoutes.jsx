@@ -7,7 +7,7 @@ import Notes from "../pages/Notes"
 import AuthProtect from "../protect/AuthProtect"
 import NotesProtect from "../protect/NotesProtect"
 import AddNote from "../pages/AddNote"
-import UptNote from "../pages/uptNote"
+import UptNote from "../pages/UptNote"
 
 export default function AppRoutes() {
     return (
