@@ -10,7 +10,7 @@ import Errors from "../components/errors"
 import axios from "axios"
 
 export default function UptNote() {
-    const reqUrl = useRef(`http://localhost:5000/api/notes/${useParams().id}`)
+    const reqUrl = useRef(`${import.meta.env.VITE_SERVER_URL}/api/notes/${useParams().id}`)
     const navigate = useNavigate()
     const dialog_1 = useRef()
     const dialog_2 = useRef()

@@ -40,7 +40,7 @@ export default function Notes() {
     abortController.current = new AbortController()
     const fetchAllNotes = async () => {
       try {
-        const url = "http://localhost:5000/api/notes?sort=-updatedAt"
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/notes?sort=-updatedAt`
         const { token } = JSON.parse(sessionStorage.getItem("my-notes-user"))
         const headers = {
           "Authorization": `Bearer ${token}`

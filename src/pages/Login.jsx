@@ -40,7 +40,7 @@ export default function Signup() {
             uptLoading(true)
             const { username, password } = inpVals
             try {
-                const responseData = await axios.post("http://localhost:5000/api/login", {
+                const responseData = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/login`, {
                     username,
                     password
                 }, {

@@ -47,7 +47,7 @@ export default function AddNote() {
         if (!onceChecked) uptOnceChecked(true)
         if (validate(inpObj.title.trim(), inpObj.note.trim())) {
             uptDisabled(true)
-            const apiUrl = "http://localhost:5000/api/notes"
+            const apiUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes`
             const { token } = JSON.parse(sessionStorage.getItem("my-notes-user"))
             const headers = {
                 "Authorization": `Bearer ${token}`
