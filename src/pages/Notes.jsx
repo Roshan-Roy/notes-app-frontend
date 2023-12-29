@@ -5,7 +5,7 @@ import { FaHome } from 'react-icons/fa'
 import { AiOutlineStar, AiFillStar } from "react-icons/ai"
 import { FiSearch } from "react-icons/fi"
 import Note from "../components/Note"
-import Errors from "../components/errors"
+import Errors from "../components/Errors"
 import { MdOutlineSearchOff } from "react-icons/md"
 import { TbFaceIdError, TbNotesOff } from "react-icons/tb"
 import { LuStarOff } from "react-icons/lu"
