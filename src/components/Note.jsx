@@ -1,8 +1,11 @@
 import { AiFillStar } from "react-icons/ai"
+import { useNavigate } from "react-router-dom"
 import "../styles/note.css"
+
 export default function Note({ note }) {
-    const { title, description, starred, updatedAt } = note
-    function formatDateTimeWithTimezone(date) {
+    const { _id, title, description, starred, updatedAt } = note
+    const navigate = useNavigate()
+    const formatDateTimeWithTimezone = (date) => {
         const options = {
             month: 'long',
             day: 'numeric',
@@ -14,13 +17,12 @@ export default function Note({ note }) {
         return new Intl.DateTimeFormat(undefined, options).format(date);
     }
     const updated = new Date(updatedAt)
-
     return (
-        <div className="note">
+        <div className="note" onClick={() => { navigate(`/update/${_id}`) }}>
             <h2>{title}</h2>
             <p className="description">{description}</p>
             {starred ? <AiFillStar /> : null}
-            <hr/>
+            <hr />
             <p className="date-time">{formatDateTimeWithTimezone(updated)}</p>
         </div>
     )

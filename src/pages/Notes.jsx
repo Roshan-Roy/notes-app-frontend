@@ -2,14 +2,12 @@ import { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { FaHome } from 'react-icons/fa'
-import { AiOutlineStar } from "react-icons/ai"
-import { AiFillStar } from "react-icons/ai"
+import { AiOutlineStar, AiFillStar } from "react-icons/ai"
 import { FiSearch } from "react-icons/fi"
 import Note from "../components/Note"
 import Errors from "../components/errors"
 import { MdOutlineSearchOff } from "react-icons/md"
-import { TbFaceIdError } from "react-icons/tb"
-import { TbNotesOff } from "react-icons/tb"
+import { TbFaceIdError, TbNotesOff } from "react-icons/tb"
 import { LuStarOff } from "react-icons/lu"
 import PageLoader from "../components/PageLoader"
 import { IoMdAdd } from "react-icons/io"
@@ -36,7 +34,7 @@ export default function Notes() {
   }, [type])
   useEffect(() => {
     performSearch()
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }, [notes, searchVal])
   useEffect(() => {
     abortController.current = new AbortController()
@@ -71,7 +69,7 @@ export default function Notes() {
             <li><label htmlFor="search"><FiSearch /></label></li>
             <li><input type="text" placeholder={type ? "All Notes" : "Starred Notes"} id="search" onChange={e => { uptSearchVal(e.target.value) }} value={searchVal} /></li>
             <li onClick={() => {
-              window.scrollTo(0,0)
+              window.scrollTo(0, 0)
               uptType(e => !e)
             }}>{type ? <AiOutlineStar /> : <AiFillStar />}</li>
             <li><Link to="/"><FaHome /></Link></li>

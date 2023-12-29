@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 import axios from "axios"
-import "../styles/addnote.css"
 import { FaHome, FaRegListAlt } from "react-icons/fa"
-import { AiOutlineStar } from "react-icons/ai"
-import { AiFillStar } from "react-icons/ai"
+import { AiOutlineStar, AiFillStar } from "react-icons/ai"
+import { MdOutlineDoneOutline } from "react-icons/md"
 
 export default function AddNote() {
     const [onceChecked, uptOnceChecked] = useState(false)
@@ -18,7 +17,7 @@ export default function AddNote() {
     })
     const [error, uptErrors] = useState({
         shown: false,
-        message: "nf"
+        message: ""
     })
     const showError = (msg) => {
         uptErrors({ shown: true, message: msg })
@@ -32,11 +31,11 @@ export default function AddNote() {
         const errorArr = []
 
         if (title === "") errorArr.push("Title is empty")
-        else if (title.length > 30) errorArr.push("Title length < 30")
+        else if (title.length > 50) errorArr.push("Title length < 50")
         else titleValidated = true
 
         if (note === "") errorArr.push("Note is empty")
-        else if (note.length > 1000) errorArr.push("Note length > 1000")
+        else if (note.length > 2500) errorArr.push("Note length > 2500")
         else noteValidated = true
 
         if (noteValidated && titleValidated) hideError()
@@ -95,17 +94,22 @@ export default function AddNote() {
         <section className="add-note">
             <div className="header">
                 <div className="container">
-                    <h2>Add Note</h2>
+                    <h2>NoteFlow</h2>
                     <div className="links-container sm">
                         <Link to="/notes"><FaRegListAlt /></Link>
                         <Link to="/"><FaHome /></Link>
                     </div>
+                    <div className="links-container lg">
+                        <Link to="/notes">Notes</Link>
+                        <Link to="/">Home</Link>
+                    </div>
                 </div>
+
             </div>
             <div className="add-upt-inputs">
                 <div className="container">
-                    <input type="text" value={inpObj.title} placeholder="Title" onChange={i => uptInpObj(e => ({ ...e, title: i.target.value }))} disabled={disabled} />
-                    <textarea value={inpObj.note} placeholder="Note" onChange={i => uptInpObj(e => ({ ...e, note: i.target.value }))} disabled={disabled}></textarea>
+                    <input type="text" spellCheck={false} value={inpObj.title} placeholder="Title" onChange={i => uptInpObj(e => ({ ...e, title: i.target.value }))} disabled={disabled} />
+                    <textarea value={inpObj.note} spellCheck={false} placeholder="Note" onChange={i => uptInpObj(e => ({ ...e, note: i.target.value }))} disabled={disabled}></textarea>
                 </div>
             </div>
             <div className="save-footer">
@@ -117,9 +121,10 @@ export default function AddNote() {
                     }}>{starred ? <AiFillStar /> : <AiOutlineStar />}</div>
                 </div>
             </div>
-            <dialog ref={dialog} className="dialog-box">
-                <h2>Note Created</h2>
-                <button onClick={handleContinueBtnClick}>Okay</button>
+            <dialog ref={dialog} className="dialog-box-2">
+                <MdOutlineDoneOutline />
+                <p>Note created successfully</p>
+                <button onClick={handleContinueBtnClick}>Continue</button>
             </dialog>
         </section>
     )

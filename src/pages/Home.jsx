@@ -4,7 +4,6 @@ import { useAuthFunc } from "../components/AppContext"
 import { AiOutlineInfoCircle } from "react-icons/ai"
 import { FiLogOut } from "react-icons/fi"
 import { FaArrowRight } from "react-icons/fa"
-import "../styles/dialog_1.css"
 import "../styles/home.css"
 
 export default function Home() {

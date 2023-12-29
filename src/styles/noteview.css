@@ -1,0 +1,216 @@
+.add-note,
+.upt-note {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        border-bottom: 1px solid #ccc;
+        background-color: white;
+        color: #333;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        width: 100%;
+
+        .container {
+            height: 65px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & h2 {
+                font-size: 22px;
+            }
+
+            .links-container {
+                display: flex;
+                font-size: 26px;
+                gap: 15px;
+
+                &.sm a {
+                    display: flex;
+
+                    & svg {
+                        color: #333;
+                    }
+                }
+
+                &.lg {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .add-upt-inputs {
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        top: 65px;
+        padding: 15px 0 85px 0;
+
+        .container input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 17px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 20px;
+            background-color: white;
+            font-weight: bold;
+        }
+
+        .container textarea {
+            width: 100%;
+            font-size: 18px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            height: 1000px;
+            padding: 17px;
+            background-color: white;
+            resize: none;
+            line-height: 1.5;
+        }
+    }
+
+    .save-footer {
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+        bottom: 0;
+        background-color: white;
+        border-top: 1px solid #ccc;
+
+        .container {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+
+            & button {
+                height: 45px;
+                flex: 1;
+                border: none;
+                font-size: 14px;
+                border-radius: 10px;
+                background-color: #333;
+                color: white;
+                &.disabled {
+                    opacity: 0.7;
+                }
+            }
+
+            & div {
+                display: flex;
+                font-size: 40px;
+
+                &.disabled {
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .error-div {
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            padding: 7px 10px 2px 10px;
+            color: #b33a3a;
+
+            @media screen and (min-width:600px) {
+                font-size: 16px;
+                padding: 10px 10px 10px 10px;
+            }
+        }
+    }
+
+    @media screen and (min-width:1000px) {
+        .container {
+            width: 80%;
+        }
+
+        .header .container {
+            height: 85px;
+
+            & h2 {
+                font-size: 28px;
+            }
+
+            .links-container {
+                &.sm {
+                    display: none;
+                }
+
+                &.lg {
+                    display: flex;
+                    font-size: 18px;
+                    font-weight: bold;
+
+                    & a {
+                        background-color: green;
+                        padding: 15px 0;
+                        border-radius: 100vh;
+                        width: 125px;
+                        color: white;
+                        display: block;
+                        text-align: center;
+                        background-color: #333;
+                    }
+                }
+            }
+
+        }
+
+        .add-upt-inputs {
+            top: 85px;
+            padding: 20px 0 115px 0;
+
+            .container input {
+                padding: 25px;
+                margin-bottom: 12px;
+                font-size: 28px;
+            }
+
+            .container textarea {
+                width: 100%;
+                font-size: 20px;
+                padding: 25px;
+            }
+        }
+
+        .save-footer .container {
+            height: 95px;
+            gap: 20px;
+
+            & button {
+                height: 60px;
+                font-size: 20px;
+            }
+
+            & div {
+                font-size: 60px;
+            }
+        }
+    }
+}
+
+.upt-note {
+    .load-wrapper {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .notes-error-wrapper {
+        height: 100vh;
+        min-height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
