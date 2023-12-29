@@ -40,7 +40,7 @@ export default function Notes() {
     abortController.current = new AbortController()
     const fetchAllNotes = async () => {
       try {
-        const url = "http://localhost:5000/api/notes"
+        const url = "http://localhost:5000/api/notes?sort=-updatedAt"
         const { token } = JSON.parse(sessionStorage.getItem("my-notes-user"))
         const headers = {
           "Authorization": `Bearer ${token}`
@@ -81,7 +81,7 @@ export default function Notes() {
           {serverError ? <Errors msg="An error occurred !" svg={<TbFaceIdError />} /> :
             loading ? <PageLoader /> :
               notes.length === 0 && type ? <Errors msg="No notes found" svg={<TbNotesOff />} /> :
-                notes.length === 0 ? <Errors msg="No starred notes" svg={<LuStarOff />} /> :
+                notes.filter(e => e.starred).length === 0 && !type ? <Errors msg="No starred notes" svg={<LuStarOff />} /> :
                   filteredNotes.length === 0 ? <Errors msg="No results found" svg={<MdOutlineSearchOff />} /> :
                     type ? <div className="notes">{filteredNotes.map(e => <Note key={e._id} note={e} />)}</div> :
                       filteredNotes.filter(e => e.starred).length === 0 ? <Errors msg="No results found" svg={<MdOutlineSearchOff />} /> :
